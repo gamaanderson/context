@@ -47,22 +47,29 @@ def Math(*args, new=False, **kwargs):
         return MathTuple(args, **kwargs)
 
 
+
+
 class MathObject(ContextObject):
     ans = Multi_string()
-    
+
     def __init__(self, text, name=None, definition=None, **kwargs):
         super().__init__()
+        self.__str__= self._str_instance
         self.ans += text
         self.name=name
         self.ans.delimiter = " "
         self.definition = definition
 
-    def __str__(self):
+    @classmethod
+    def __str__(cls):
+        return cls._latex_classmethod()
+
+    def _str_instance(self):
         return self.latex()
 
     @property
     def long_name(self):
-      return self +Math(":=") + self.definition
+      return Math(self +":=" + self.definition)
 
 
     def latex(self, *args):
@@ -72,11 +79,18 @@ class MathObject(ContextObject):
         return ans.latex(*args)
 
     @classmethod 
-    def latex(cls, *args):
+    def _latex_classmethod(cls, *args):
         if "nomath" not in args:
             args = args + ("math",)
         ans=cls.ans
         return ans.latex(*args)
+
+    def latex(self, *args):
+        if "nomath" not in args:
+            args = args + ("math",)
+        ans=self.ans
+        return ans.latex(*args)
+
 
 class MathTuple(MathObject):
     def __init__(self, list_, **kwargs):

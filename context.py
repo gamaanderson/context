@@ -11,7 +11,7 @@ def latex(item, s, *args):
                 s.append(",")
             s[-1]=")"
         else:
-            s.append(str(item))
+            s.append(item.__str__())
 
 
 class Multi_string(list):
