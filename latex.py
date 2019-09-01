@@ -9,10 +9,10 @@ class module(ModuleType):
     """Automatically import objects from the modules."""
 
     def __getattr__(self, name):
-        if name == "__path__":
+        if name in ( "__path__","__file__"):
             return None
         else:
-            context.usepackage(name)
+            context.usepackage(name, Info="latex.py line 15")
             self.__dict__[name]=name
             return name
 

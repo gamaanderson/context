@@ -79,17 +79,22 @@ ans = Ans()
 envoriment = None
 
 import_section = Multi_string()
-def usepackage(package, frame=None, *args, **kwargs):
+def usepackage(package, *args,  Info=None, **kwargs):
     ops = ""
     for arg in args:
         ops+="%s," % arg
     for key in kwargs.keys():
         ops += "%s=%s," % (key, kwargs[key])
-    import inspect
-    frameInfo = inspect.getouterframes(inspect.currentframe())[1]
-    
+
+    if Info is None:
+      import inspect
+      frame= inspect.currentframe().f_back
+      frameInfo = inspect.getframeinfo(frame)
+
+      Info = "%s:%s"%(frameInfo.filename, frameInfo.lineno)
+
     global import_section
-    import_section += "\\usepackage[%s]{%s}#%s:%s"% (ops, package, frameInfo.filename, frameInfo.lineno)
+    import_section += "\\usepackage[%s]{%s} "%(ops, package)+r"%" + "%s"% (Info)
 # in article.py context.ans += context.import_section
 
 
