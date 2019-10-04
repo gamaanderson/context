@@ -110,7 +110,7 @@ class _basetheorem(context.Environment):
         aux += "}\n\n"
         return aux
 
-class _theorem_fabric(type):
+class _theorem_fabric(context._fabric):
     
     def __new__(cls, name, bases, _dict):
         _dict["name"] = name

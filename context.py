@@ -98,7 +98,7 @@ def usepackage(package, *args,  Info=None, **kwargs):
 # in article.py context.ans += context.import_section
 
 
-class ContextObject():
+class _ContextObject():
     def __init__(self):
         self.ans = Multi_string()
     
@@ -114,6 +114,20 @@ class ContextObject():
         s = Multi_string((other, self))
         s.delimiter = ""
         return s
+
+class _fabric(type):
+    
+    def __add__(self, other):
+        s =  Multi_string((self, other))
+        s.delimiter = ""
+        return s
+
+    def __radd__(self, other):
+        s = Multi_string((other, self))
+        s.delimiter = ""
+        return s
+
+ContextObject = _fabric("ContextObject",(_ContextObject,),{})
 
 
 class Environment(ContextObject):

@@ -1,5 +1,5 @@
-from . import Math, CallableMathObject
-import category_theory
+from . import Math, Multi_string, CallableMathObject, category_theory
+
 
 Affin = Math(r"\mathbb{A}")
 #Projectiv = Math(r"\mathbb{P}")
@@ -8,7 +8,7 @@ def _projectiv (text):
 Projectiv = CallableMathObject(r"\mathbb{P}",_projectiv)
         
 class regularFunctions(category_theory.Morphism):
-  ans = context.Multi_string(("\\mathcal{O}",))
+  ans = Multi_string(("\\mathcal{O}",))
   def __init__(self, base=None,  **kwargs):
     if base is None:
         ans = "\\mathcal{O}"
@@ -28,6 +28,6 @@ def Grassmanian(r, V):
     return Math(r"\text{Gr}(%s,%s)" % (r,V))
 
 
-def _dual(obj):
+def _dual(obj=""):
     return "{"+obj + "}^\\vee"
 dual = Math(_dual)
