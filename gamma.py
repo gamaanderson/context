@@ -4,6 +4,11 @@ from theorem import *
 from bibtex import Citation
 
 context.usepackage("inputenc","utf8")
+context.usepackage("fontspec")
+context.usepackage("dutchcal")
+context.usepackage("mathrsfs")
+context.import_section += "\DeclareFontFamily{OT1}{pzc}{}\n \DeclareFontShape{OT1}{pzc}{m}{it}{<-> s * [1.15] pzcmi7t}{}\n \DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}\n"
+context.usepackage("dsfont")
 
 context.usepackage(
     "biblatex",backend="bibtex8", sortcites="true", bibstyle="alphabetic", citestyle="alphabetic",
@@ -38,7 +43,7 @@ def bold(text):
     return r"\bm{" + text + "}"
 
 from _math import Equation
-from _math.number_theory import Complexes, Reals, Integers
+from _math.number_theory import Complexes, Reals, Integers, Rationals
 from _math.number_theory import Naturals_with_0 as Naturals
 from _math.algebra import polyring
 from _math.algebraic_geometry import Affin, Projectiv, regularFunctions, picard, spec, Grassmanian

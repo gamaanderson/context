@@ -2,8 +2,8 @@
 import context
 from _document import Document, title, author, section, Subsection, Section
 
-
-context.ans += "\\documentclass{article}"
+documentClass = context.DocumentClass("article")
+context.ans += documentClass
 context.ans += context.import_section
 maketitle = r"\maketitle"
 

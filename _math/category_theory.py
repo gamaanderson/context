@@ -28,7 +28,7 @@ class Morphism(MathObject):
             s+=arg
             s+=","
         s[-1]=")"
-        return s
+        return Math(s)
 
 class Object(MathObject):
     category = ""
@@ -49,4 +49,4 @@ class Category(MathObject):
         return mor
 
 identity = Math(r"\text{id}")
-Set_Category = Category("\\mathrm{Set}")
+Set_Category = Category("\\mathcal{Set}")

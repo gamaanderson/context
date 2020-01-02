@@ -1,9 +1,13 @@
 # This Python file uses the following encoding: utf-8
-
+import sys
+import inspect
 def latex(item, s, *args):
     try:
-        s.append(item.latex(*args))
-    except:
+        if inspect.isclass(item):
+            s.append(item._latex_classmethod(*args))
+        else:
+            s.append(item.latex(*args))
+    except Exception as err:
         if isinstance(item,tuple):
             s.append("(")
             for item2 in item:
@@ -79,6 +83,7 @@ ans = Ans()
 envoriment = None
 
 import_section = Multi_string()
+
 def usepackage(package, *args,  Info=None, **kwargs):
     ops = ""
     for arg in args:
@@ -94,6 +99,7 @@ def usepackage(package, *args,  Info=None, **kwargs):
       Info = "%s:%s"%(frameInfo.filename, frameInfo.lineno)
 
     global import_section
+
     import_section += "\\usepackage[%s]{%s} "%(ops, package)+r"%" + "%s"% (Info)
 # in article.py context.ans += context.import_section
 
@@ -115,6 +121,10 @@ class _ContextObject():
         s.delimiter = ""
         return s
 
+
+
+
+
 class _fabric(type):
     
     def __add__(self, other):
@@ -129,6 +139,19 @@ class _fabric(type):
 
 ContextObject = _fabric("ContextObject",(_ContextObject,),{})
 
+
+
+class DocumentClass(ContextObject):
+    def __init__(self, className, **kwargs):
+        super().__init__()
+        self.className = className
+        self.kwargs = kwargs
+
+    def __str__(self):
+        ops = ""
+        for key in self.kwargs.keys():
+            ops += "%s," % (self.kwargs[key])
+        return "\\documentclass[%s]{%s}" % (ops,self.className)
 
 class Environment(ContextObject):
     begin = ""

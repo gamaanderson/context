@@ -18,3 +18,12 @@ class Sections(MathObject):
     super().__init__(ans)
     self.bundle = Math(bundle)
 
+class C_differential_class(MathObject):
+  ans = Multi_string(("\\mathpzc{C}",))
+  def __init__(self, order ,  **kwargs):
+    order = Math(order)  
+    ans = "\\mathpzc{C}^"+order
+    super().__init__(ans)
+    self.order = order
+
+C_infinity = C_differential_class("\\infty")

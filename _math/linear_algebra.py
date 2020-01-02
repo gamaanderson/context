@@ -21,6 +21,12 @@ def _general_linear_group(field=Complexes, size="n"):
           return "\\text{GL}"+"("+field+")"
 general_linear_group = Math(_general_linear_group)
 
+def _projectiv_general_linear_group(field=Complexes, size="n"):
+        if size:
+          return "\\text{PGL}_"+size+"("+field+")"
+        else:
+          return "\\text{PGL}"+"("+field+")"
+projectiv_general_linear_group = Math(_projectiv_general_linear_group)
 
 def _special_linear_group(field=Complexes, size="n"):
         if size:
