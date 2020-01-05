@@ -1,5 +1,7 @@
-from . import Math, MathObject,CallableMathObject
+from . import Math, MathObject,CallableMathObject, MathFont
 
+class CategoryFont(MathFont):
+    latex_command = [""]
 
 isomorph = Math(r"\cong")
 hom_funktor = CallableMathObject(r"\hom", lambda *args: Math("\hom")+tuple(args))
@@ -38,6 +40,13 @@ class Object(MathObject):
         return Math(self+"\\in "+self.category)
 
 class Category(MathObject):
+
+    def __init__(self, text, *args, category_font=False, **kwargs):
+        if category_font is True:
+            text = CategoryFont(text)
+        super().__init__(text, *args, **kwargs)
+
+
     def Object(self, name):
         obj = Object(name)
         obj.category = self
@@ -49,4 +58,4 @@ class Category(MathObject):
         return mor
 
 identity = Math(r"\text{id}")
-Set_Category = Category("\\mathcal{Set}")
+Set_Category = Category("Set", category_font=True)

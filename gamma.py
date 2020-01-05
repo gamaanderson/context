@@ -5,10 +5,7 @@ from bibtex import Citation
 
 context.usepackage("inputenc","utf8")
 context.usepackage("fontspec")
-context.usepackage("dutchcal")
-context.usepackage("mathrsfs")
-context.import_section += "\DeclareFontFamily{OT1}{pzc}{}\n \DeclareFontShape{OT1}{pzc}{m}{it}{<-> s * [1.15] pzcmi7t}{}\n \DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}\n"
-context.usepackage("dsfont")
+
 
 context.usepackage(
     "biblatex",backend="bibtex8", sortcites="true", bibstyle="alphabetic", citestyle="alphabetic",
@@ -58,9 +55,9 @@ def todo(text):
     return r"TODO: \textit{"+text+"}"
 
 context.ans += r"\let\propsubset\subset"
-context.ans += r"\renewcommand{\subset}{\subseteqq}"
+context.ans += r"\renewcommand{\subset}{\subseteq}"
 context.ans += r"\let\propsupset\supset"
-context.ans += r"\renewcommand{\supset}{\supseteqq}"
+context.ans += r"\renewcommand{\supset}{\supseteq}"
 
 class Proof_idea(Proof):
     def __init__(self, *args, **kwargs):

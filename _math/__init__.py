@@ -56,7 +56,15 @@ def Math(*args, new=False, **kwargs):
         return MathTuple(args, **kwargs)
 
 
+class MathFont(ContextObject):
+    latex_command = [""]
+    
+    def __init__(self,text):
+        super().__init__()
+        self.text = text
 
+    def __str__(self):
+        return ""+self.latex_command[0]+"{"+self.text+"}"
 
 class MathObject(ContextObject):
     ans = Multi_string()
@@ -68,6 +76,8 @@ class MathObject(ContextObject):
         self.name=name
         self.ans.delimiter = " "
         self.definition = definition
+
+    
 
     @classmethod
     def __str__(cls):

@@ -1,4 +1,15 @@
-from . import Math,  MathObject, Multi_string
+from . import Math,  MathObject, CallableMathObject, Multi_string, MathFont, number_theory
+
+
+
+class DifferentialFont(MathFont):
+    latex_command = [""]
+
+class C_Font(MathFont):
+    latex_command = [""]
+
+class EichFont(MathFont):
+    latex_command = [""]
 
 class Forms(MathObject):
   def __init__(self, manifold, degree=None,  **kwargs):
@@ -18,12 +29,17 @@ class Sections(MathObject):
     super().__init__(ans)
     self.bundle = Math(bundle)
 
+
 class C_differential_class(MathObject):
-  ans = Multi_string(("\\mathpzc{C}",))
+  ans = Multi_string((C_Font("C"),))
   def __init__(self, order ,  **kwargs):
     order = Math(order)  
-    ans = "\\mathpzc{C}^"+order
+    ans = C_Font("C")+"^"+order
     super().__init__(ans)
     self.order = order
 
 C_infinity = C_differential_class("\\infty")
+
+def _projectiv (text):
+        return number_theory.BboldFont("P")+"("+text+")"
+Projectiv = CallableMathObject(number_theory.BboldFont("P"),_projectiv)

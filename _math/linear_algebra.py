@@ -1,5 +1,10 @@
-from . import Math, CallableMathObject
+from . import Math, CallableMathObject, MathFont
 from .number_theory import Complexes
+from .category_theory import  Morphism
+
+class LinearFont(MathFont):
+    latex_command = ["\\text"]
+
 
 def dual(text):
     return text+"^*"
@@ -16,41 +21,45 @@ tensor = CallableMathObject("\\otimes", _tensor)
 
 def _general_linear_group(field=Complexes, size="n"):
         if size:
-          return "\\text{GL}_"+size+"("+field+")"
+          return LinearFont("GL")+"_"+size+"("+field+")"
         else:
-          return "\\text{GL}"+"("+field+")"
+          return LinearFont("GL")+"("+field+")"
 general_linear_group = Math(_general_linear_group)
 
 def _projectiv_general_linear_group(field=Complexes, size="n"):
         if size:
-          return "\\text{PGL}_"+size+"("+field+")"
+          return  LinearFont("PGL")+"_"+size+"("+field+")"
         else:
-          return "\\text{PGL}"+"("+field+")"
+          return  LinearFont("PGL")+"("+field+")"
 projectiv_general_linear_group = Math(_projectiv_general_linear_group)
 
 def _special_linear_group(field=Complexes, size="n"):
         if size:
-          return "\\text{SL}_"+size+"("+field+")"
+          return  LinearFont("SL")+"_"+size+"("+field+")"
         else:
-          return "\\text{SL}"+"("+field+")"
+          return  LinearFont("SL")+"("+field+")"
 special_linear_group = Math(_special_linear_group)
 
 def _projectiv_special_linear_group(field=Complexes, size="n"):
         if size:
-          return "\\text{PSL}_"+size+"("+field+")"
+          return  LinearFont("PSL")+"_"+size+"("+field+")"
         else:
-          return "\\text{PSL}"+"("+field+")"
+          return  LinearFont("PSL")+"("+field+")"
 projectiv_special_linear_group = Math(_projectiv_special_linear_group)
 
 def _unitary_linear_group(field=Complexes, size="n"):
         if size:
-          return "\\text{U}_"+size+"("+field+")"
+          return  LinearFont("U")+"_"+size+"("+field+")"
         else:
-          return "\\text{U}"+"("+field+")"
+          return  LinearFont("U")+"("+field+")"
 unitary_linear_group = Math(_unitary_linear_group)
 
 
 
 def _matrixes(ring=Complexes, size="n"):
-        return "\\text{M}_"+size+"("+ring+")"
+        return LinearFont("M")+"_"+size+"("+ring+")"
 Matrixes = Math(_matrixes)
+
+
+
+one_morphism =  Morphism("1")
