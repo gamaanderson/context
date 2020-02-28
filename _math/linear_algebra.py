@@ -60,6 +60,6 @@ def _matrixes(ring=Complexes, size="n"):
         return LinearFont("M")+"_"+size+"("+ring+")"
 Matrixes = Math(_matrixes)
 
-
+symetric_algebra = Morphism(LinearFont("Sym"))
 
 one_morphism =  Morphism("1")
