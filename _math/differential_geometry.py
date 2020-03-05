@@ -21,6 +21,17 @@ class Forms(MathObject):
     self.manifold = Math(manifold)
     self.degree = Math(degree)
 
+class Forms_bundle(MathObject):
+  def __init__(self, manifold, degree=None,  **kwargs):
+    if degree is None:
+      ans = "\Omega ("+Math(manifold)+")"
+    else:
+      ans = "\Omega^{"+Math(degree)+"} ("+Math(manifold)+")"
+    super().__init__(ans)
+    self.manifold = Math(manifold)
+    self.degree = Math(degree)
+
+
 
 class Sections(MathObject):
   ans = Multi_string(("\\Gamma",))
@@ -43,3 +54,6 @@ C_infinity = C_differential_class("\\infty")
 def _projectiv (text):
         return number_theory.BboldFont("P")+"("+text+")"
 Projectiv = CallableMathObject(number_theory.BboldFont("P"),_projectiv)
+
+
+endormophism_bundle = lambda bundle: Math(DifferentialFont("End")+Math(bundle,None))
