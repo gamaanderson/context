@@ -57,12 +57,16 @@ class _basetheorem(context.Environment):
               self.proof = Proof(theorem=self)
           else:
               self.proof = Short_proof(theorem=self)
+              proof = True
         else:
           self.theorem = theorem
-          self.name = babel.PROOF_OF+" %s" % theorem.ref
+          if isinstance(theorem, Definition):
+            self.name = babel.WELLDEFINITION_OF +" %s" % theorem.ref
+          else:
+            self.name = babel.PROOF_OF+" %s" % theorem.ref
         if name is not None:
             self.name = name
-        self.proof_link = proof
+        self.proof_link = proof or proof_type is not "long"
 
     def __enter__(self):
         super().__enter__()
@@ -105,8 +109,18 @@ class _basetheorem(context.Environment):
             aux = "\n"
         else:
             aux = " \hfill %s\n" % self.theorem_end
-        if self.proof_link:
-            aux += r"\protect \textit{"+babel.TO_PROOF+": " + self.proof.ref + "}\n\n"
+        if self.proof_link:             
+            if isinstance(self.proof, Proof):
+                if isinstance(self, Definition):
+                    aux += r"\protect \textit{"+babel.TO_WELLDEFINITION+": }" + self.proof.ref + "\n\n"
+                else:
+                    aux += r"\protect \textit{"+babel.TO_PROOF+": }" + self.proof.ref + "\n\n"
+            elif  isinstance(self.proof, Short_proof):
+                if isinstance(self, Definition):
+                    aux += r"\protect \textit{"+babel.TO_WELLDEFINITION+": }" + self.proof + "\n\n"
+                else:
+                    aux += r"\protect \textit{"+babel.TO_PROOF+": }" + self.proof + "\n\n"
+            
         aux += "}\n\n"
         return aux
 
@@ -152,10 +166,11 @@ class Short_proof(context.Environment):
         super().__init__(*args, **kwargs)
         self.theorem = theorem
         self.silence = True
+        self.end = "\hfill "+self.theorem_end
 
-    @property
-    def ref(self):
-      return self.ans+"\hfill"+self.theorem_end
+#    @property
+#    def ref(self):
+#      return self.ans+"\hfill"+self.theorem_end
 
 context.ans += r"\usepackage{titlesec}"
 context.ans += r"\titlespacing{\subparagraph}{0pt}{0pt}{1em}"
