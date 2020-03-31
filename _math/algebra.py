@@ -1,6 +1,7 @@
 from . import Math
 
 from .number_theory import Complexes
+from .linear_algebra import LinearFont as FieldFont
 
 Complex_Torus = Math(Complexes + "^*")
 

@@ -41,19 +41,21 @@ class Object(MathObject):
 
 class Category(MathObject):
 
-    def __init__(self, text, *args, category_font=False, **kwargs):
+    def __init__(self, text, *args, category_font=False, object_font=MathFont, morphism_font=MathFont, **kwargs):
         if category_font is True:
             text = CategoryFont(text)
         super().__init__(text, *args, **kwargs)
+        self.object_font = object_font
+        self.morphism_font = morphism_font
 
 
     def Object(self, name):
-        obj = Object(name)
+        obj = Object(self.object_font(name))
         obj.category = self
         return obj
 
     def Morphism (self, name, domane, codomane):
-        mor = Morphism(name, domane, codomane)
+        mor = Morphism(self.morphism_font(name), domane, codomane)
         mor.category = self
         return mor
 

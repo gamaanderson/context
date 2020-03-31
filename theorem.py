@@ -44,7 +44,7 @@ class _basetheorem(context.Environment):
     formation = ""
     style = ()
 
-    def __init__(self, name=None, ans=None, theorem=None, proof=False, proof_type = "long", **kwargs):
+    def __init__(self, name=None, subname=None ans=None, theorem=None, proof=False, proof_type = "long", **kwargs):
         super().__init__(**kwargs)
         self.dependences = []
         if ans is not None:
@@ -66,6 +66,8 @@ class _basetheorem(context.Environment):
             self.name = babel.PROOF_OF+" %s" % theorem.ref
         if name is not None:
             self.name = name
+        if subname is not None:
+            self.name += ": "+subname
         self.proof_link = proof or proof_type is not "long"
 
     def __enter__(self):
