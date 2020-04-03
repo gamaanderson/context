@@ -33,7 +33,7 @@ Example.definition = r"\declaretheorem[style=definition,qed=$\Diamond$,sibling=t
 
 
 def define(text):
-    return r" \underline{%s} " % text
+    return r" \textit{%s} " % text
 def remind(text):
     return " " + text + " "
 def bold(text):
@@ -69,8 +69,7 @@ class Proof_idea(Proof):
 
 act = r"\mathbin{\circlearrowleft}"
 
-def define(text):
-  return "\\textit{"+text+"}"
+
 
 """
 

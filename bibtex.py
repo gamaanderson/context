@@ -9,6 +9,10 @@ class Citation(context.ContextObject):
     @property
     def ref(self):
       if self.reference is None:
-        return "\\cite{"+self.cite+"}"
+        return r"\cite{"+self.cite+r"}"
       else:
-        return "\\cite["+self.reference+"]{"+self.cite+"}"
+        return r"\cite["+self.reference+r"]{"+self.cite+r"}"
+
+    @property
+    def link(self):
+      return r"\footnote{"+self.ref+r"\hspace*{1cm} }"

@@ -44,7 +44,7 @@ class _basetheorem(context.Environment):
     formation = ""
     style = ()
 
-    def __init__(self, name=None, subname=None ans=None, theorem=None, proof=False, proof_type = "long", **kwargs):
+    def __init__(self, name=None, subname=None, ans=None, theorem=None, proof=False, proof_type = "long", **kwargs):
         super().__init__(**kwargs)
         self.dependences = []
         if ans is not None:

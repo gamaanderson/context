@@ -59,5 +59,5 @@ class Category(MathObject):
         mor.category = self
         return mor
 
-identity = Math(r"\text{id}")
+identity = Math(r"\mathrm{id}")
 Set_Category = Category("Set", category_font=True)

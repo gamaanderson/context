@@ -1,7 +1,7 @@
 from . import Math, Multi_string, CallableMathObject, category_theory, MathFont
 from .linear_algebra import LinearFont
 from .category_theory import Morphism, CategoryFont
-from .algebra import FieldFont, Complexes
+from .algebra import Field_Category, Complexes
 
 class SchemeFont(MathFont):
     latex_command = [""]
@@ -44,9 +44,9 @@ def _dual(obj=""):
     return "{"+obj + "}^\\vee"
 dual = Math(_dual)
 
-
+field = Field_Category.Object("K")
 Scheme_Category =  category_theory.Category(CategoryFont("Sch"),  object_font=SchemeFont)
-Variety_Category =  category_theory.Category(CategoryFont("Var")+"_"+FieldFont("K"), object_font=SchemeFont)
+Variety_Category =  category_theory.Category(CategoryFont("Var")+"_"+field, object_font=SchemeFont)
 Complex_Variety_Category =  category_theory.Category(CategoryFont("Var")+"_"+Complexes, object_font=SchemeFont)
 
 class Sheaf_cohomology(category_theory.Morphism):
