@@ -68,7 +68,7 @@ class _basetheorem(context.Environment):
             self.name = name
         if subname is not None:
             self.name += ": "+subname
-        self.proof_link = proof or proof_type is not "long"
+        self.proof_link = proof or (proof_type is not "long")
 
     def __enter__(self):
         super().__enter__()
@@ -117,7 +117,7 @@ class _basetheorem(context.Environment):
                     aux += r"\protect \textit{"+babel.TO_WELLDEFINITION+": }" + self.proof.ref + "\n\n"
                 else:
                     aux += r"\protect \textit{"+babel.TO_PROOF+": }" + self.proof.ref + "\n\n"
-            elif  isinstance(self.proof, Short_proof):
+            else:
                 if isinstance(self, Definition):
                     aux += r"\protect \textit{"+babel.TO_WELLDEFINITION+": }" + self.proof + "\n\n"
                 else:
