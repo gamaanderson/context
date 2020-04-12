@@ -1,5 +1,5 @@
-from . import Math,  MathObject, CallableMathObject, Multi_string, MathFont, number_theory
-
+from . import Math,  MathObject, CallableMathObject, Multi_string, MathFont, number_theory, category_theory
+from .linear_algebra import LinearFont
 
 
 class DifferentialFont(MathFont):
@@ -57,3 +57,12 @@ Projectiv = CallableMathObject(number_theory.BboldFont("P"),_projectiv)
 
 
 endormophism_bundle = lambda bundle: Math(DifferentialFont("End")+Math(bundle,None))
+
+
+class DeRahm_cohomology(category_theory.Morphism):
+  ans = Multi_string((Math(LinearFont("H")),))
+  def __init__(self, order,  **kwargs):
+    order = Math(order)
+    ans = LinearFont("H")+"_{dR}"+"^{"+order+"}"
+    super().__init__(ans)
+    self.order = order
