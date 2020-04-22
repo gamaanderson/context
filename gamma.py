@@ -1,6 +1,7 @@
 import context
 from article import *
 from theorem import *
+from lazy_referenz import ref, link
 from bibtex import Citation
 
 context.usepackage("inputenc","utf8")

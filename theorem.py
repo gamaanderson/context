@@ -110,7 +110,7 @@ class _basetheorem(context.Environment):
         if self.theorem_end is None:
             aux = "\n"
         else:
-            aux = " \hfill %s\n" % self.theorem_end
+            aux = " \hfill %s\n\n" % self.theorem_end
         if self.proof_link:             
             if isinstance(self.proof, Proof):
                 if isinstance(self, Definition):
