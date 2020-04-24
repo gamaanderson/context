@@ -5,6 +5,10 @@ import inspect
 
 appendix = "_"
 
+#BUG wenn Dokumente direkt im main datei gebildet wird, dann wir nichts importiert, das heißt sys.module funktiniert nicht.
+#BUG verkurzung ref comfliktiert mit ref von modulen, also wie kann man sectionen referenzieren, sie werden auch nicht direkt gebildet, sondern nur durch doktorarbeit.py
+
+
 class lazy_reference(ContextObject):
     def __init__(self, ref_string):
         super().__init__()
