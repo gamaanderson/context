@@ -48,7 +48,7 @@ class lazy_link(ContextObject):
     def __str__(self):
         if self.module_name in sys.modules.keys():
             mod = sys.modules[self.module_name]
-            return functools.reduce(getattr, self.path+["ref"], mod)
+            return functools.reduce(getattr, self.path+["link"], mod)
         elif self.path:
             return r"\footnote{"+str(self.path[-1]).replace("_","\\_")+r" \hspace*{1cm}}"
         else:
