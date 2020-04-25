@@ -19,19 +19,27 @@ def section(_title):
 
 class Section(context.Environment):
     
-    def __init__(self, title, short_title=None, silence=False):
+    def __init__(self, title, short_title=None, numbered=True, silence=False):
         super().__init__(silence=silence)
         self.title = title
-        if short_title is None:
-            self.begin = "\\section{%s}\label{%i}" % (title,id(self))
+        if numbered:
+          name = "\\section"
         else:
-            self.begin = "\\section[%s]{%s}\label{%i}" % (short_title,title,id(self))
+          name = "\\section*"
+        if short_title is None:
+            self.begin = name + "{%s}\label{%i}" % (title,id(self))
+        else:
+            self.begin = name + "[%s]{%s}\label{%i}" % (short_title,title,id(self))
         self.end = ""
 
 class Subsection(context.Environment):
     
-    def __init__(self, title, silence=False):
+    def __init__(self, title, numbered=True, silence=False):
         super().__init__(silence=silence)
         self.title = title
-        self.begin = "\\subsection{%s}\label{%i}" % (title, id(self))
+        if numbered:
+          name = "\\subsection"
+        else:
+          name = "\\subsection*"
+        self.begin = name + "{%s}\label{%i}" % (title, id(self))
         self.end = ""

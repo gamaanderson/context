@@ -11,8 +11,11 @@ context.usepackage("fontspec")
 context.usepackage(
     "biblatex",backend="bibtex8", sortcites="true", bibstyle="alphabetic", citestyle="alphabetic",
     firstinits="true", useprefix="false",minnames="1", minalphanames="3", maxalphanames="4", maxbibnames="99",
-    maxcitenames="3", natbib="true", eprint="true", url="true", doi="true", isbn="true", backref="true")
+    maxcitenames="3", natbib="true", eprint="True", url="false", doi="true", isbn="true", backref="true")
 context.ans += "\\bibliography{references}"
+# https://tex.stackexchange.com/questions/200997/underlined-titles-in-bibliography-with-biblatex-and-ulem-packages
+#context.ans += "\\DeclareFieldFormat*{title}{#1}"
+#context.ans += "\\DeclareFieldFormat*{titlecase}{%\n\\ifdef{\\currentfield}\n{\\ifcurrentfield{title}\n{\\usefield{\\uline}{\\currentfield}}%\n{#1}}\n{#1}}"
 
 context.ans += r"\setlength{\parindent}{0em}"
 context.ans += r"\setlength{\parskip}\bigskipamount"
