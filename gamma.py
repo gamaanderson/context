@@ -37,7 +37,7 @@ Example.definition = r"\declaretheorem[style=definition,qed=$\Diamond$,sibling=t
 
 
 def define(text):
-    return r" \textit{%s} " % text
+    return r" \textit{"+ text+"}"
 def remind(text):
     return " " + text + " "
 def bold(text):
@@ -62,14 +62,30 @@ context.ans += r"\let\propsubset\subset"
 context.ans += r"\renewcommand{\subset}{\subseteq}"
 context.ans += r"\let\propsupset\supset"
 context.ans += r"\renewcommand{\supset}{\supseteq}"
+context.ans += r"\DeclareMathOperator{\xto}{ }"
 
-class Proof_idea(Proof):
+
+
+
+class _Proof_idea(Proof):
     def __init__(self, *args, **kwargs):
       super().__init__(*args, **kwargs)
       if self.theorem is not None:
         self.name = "Beweisidee von %s" % self.theorem.ref
       else:
         self.name = "Beweisidee"
+
+class _Short_proof_idea(Short_proof):
+    def __init__(self, *args, theorem=None, **kwargs):
+      super().__init__(*args, **kwargs)
+      self.theorem = theorem
+      self.ans += r"\protect \textit{Beweisidee:}"
+
+def Proof_idea(*args, proof_type="long", **kwargs):
+    if proof_type is "long":
+      return _Proof_idea(*args,*kwargs)
+    else:
+      return _Short_proof_idea(*args,*kwargs)
 
 act = r"\mathbin{\circlearrowleft}"
 

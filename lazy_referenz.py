@@ -21,6 +21,7 @@ class lazy_reference(ContextObject):
         else:
             self.module_name = ref_string.split(".")[0]+appendix
             self.path = ref_string.split(".")[1:]
+        self.first_call = str(self)
 
     def __str__(self):
         if self.module_name in sys.modules.keys():
@@ -55,8 +56,14 @@ class lazy_link(ContextObject):
             return r"\footnote{"+str(self.module_name).replace("_","\\_")+r" \hspace*{1cm}}"
 
 
+list_refs = []
+
 def ref(ref_string):
-    return lazy_reference(ref_string)
+    aux = lazy_reference(ref_string)
+    list_refs.append(aux)
+    return aux
 
 def link(ref_string):
-    return lazy_link(ref_string)
+    aux = lazy_link(ref_string)
+    list_refs.append(aux)
+    return aux

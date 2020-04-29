@@ -45,9 +45,9 @@ def _dual(obj=""):
 dual = Math(_dual)
 
 field = Field_Category.Object("K")
-Scheme_Category =  category_theory.Category(CategoryFont("Sch"),  object_font=SchemeFont)
-Variety_Category =  category_theory.Category(CategoryFont("Var")+"_"+field, object_font=SchemeFont)
-Complex_Variety_Category =  category_theory.Category(CategoryFont("Var")+"_"+Complexes, object_font=SchemeFont)
+Scheme_Category =  category_theory.Category(CategoryFont("Sch"),  object_font=SchemeFont, morphism_font=SchemeFont)
+Variety_Category =  category_theory.Category(CategoryFont("Var")+"_"+field, object_font=SchemeFont, morphism_font=SchemeFont)
+Complex_Variety_Category =  category_theory.Category(CategoryFont("Var")+"_"+Complexes, object_font=SchemeFont, morphism_font=SchemeFont)
 
 class Sheaf_cohomology(category_theory.Morphism):
   ans = Multi_string((Math(LinearFont("H")),))
