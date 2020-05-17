@@ -40,7 +40,7 @@ class _basetheorem(context.Environment):
     theorem_end = None
     counter = "theorem"
     label_counters = ("section", "theorem")
-    environment = "paragraph"
+    environment = "textbf"
     formation = ""
     style = ()
 
@@ -79,7 +79,7 @@ class _basetheorem(context.Environment):
     @property
     def begin(self):
         aux = r"\refstepcounter{%s}" %  self.counter
-        aux += r"\%s{" % self.environment
+        aux += r"\newline\%s{" % self.environment
         for counter in self.label_counters:
             aux += r"\arabic{%s}." % counter
         if aux[-1] is ".":

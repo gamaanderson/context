@@ -44,7 +44,7 @@ def _dual(obj=""):
     return "{"+obj + "}^\\vee"
 dual = Math(_dual)
 
-field = Field_Category.Object("K")
+field = Field_Category.Object("k")
 Scheme_Category =  category_theory.Category(CategoryFont("Sch"),  object_font=SchemeFont)
 Variety_Category =  category_theory.Category(CategoryFont("Var")+"_"+field, object_font=SchemeFont)
 Complex_Variety_Category =  category_theory.Category(CategoryFont("Var")+"_"+Complexes, object_font=SchemeFont)

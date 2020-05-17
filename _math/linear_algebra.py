@@ -54,6 +54,12 @@ def _unitary_linear_group(field=Complexes, size="n"):
           return  LinearFont("U")+"("+field+")"
 unitary_linear_group = Math(_unitary_linear_group)
 
+def _orthogonal_linear_group(field=Complexes, size="n"):
+        if size:
+          return  LinearFont("O")+"_"+size+"("+field+")"
+        else:
+          return  LinearFont("O")+"("+field+")"
+orthogonal_linear_group = Math(_unitary_linear_group)
 
 
 def _matrixes(ring=Complexes, size="n"):
