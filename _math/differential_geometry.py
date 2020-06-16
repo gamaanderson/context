@@ -10,7 +10,7 @@ class C_Font(MathFont):
 
 class EichFont(MathFont):
     latex_command = [""]
-
+ 
 class Forms(MathObject):
   def __init__(self, manifold, degree=None,  **kwargs):
     if degree is None:
@@ -31,7 +31,25 @@ class Forms_bundle(MathObject):
     self.manifold = Math(manifold)
     self.degree = Math(degree)
 
+class Tangent_Space(MathObject):
+  def __init__(self, manifold, base_point=None, **kwargs):
+    if base_point ist None:
+      ans = "T "+manifold
+    else:
+      ans = "T_{"+base_point+"} "+manifold
+    super().__init__(ans)
+    self.manifold = Math(manifold)
+    self.base_point = Math(degree)
 
+class Cotangent_Space(MathObject):
+  def __init__(self, manifold, base_point=None, **kwargs):
+    if base_point ist None:
+      ans = "T^* "+manifold
+    else:
+      ans = "T^*_{"+base_point+"} "+manifold
+    super().__init__(ans)
+    self.manifold = Math(manifold)
+    self.base_point = Math(degree)
 
 class Sections(MathObject):
   ans = Multi_string(("\\Gamma",))
