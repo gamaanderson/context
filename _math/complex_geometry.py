@@ -7,7 +7,7 @@ class ComplexFont(MathFont):
 
 from .differential_geometry import Forms_bundle
 
-endormophism_bundle = lambda bundle: Math(ComplexFont("End")+Math(bundle,None))
+endomorphism_bundle = lambda bundle: Math(ComplexFont("End")+Math(bundle,None))
 
 
 class Dolbeault_cohomology(category_theory.Morphism):

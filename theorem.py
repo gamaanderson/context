@@ -52,6 +52,7 @@ class _basetheorem(context.Environment):
             self.ans += ans
             #self.ans += self.end
         self.subtheorems = []
+        self.theorem = theorem
         if theorem is None:
           if proof_type == "long":
               self.proof = Proof(theorem=self)
@@ -59,7 +60,6 @@ class _basetheorem(context.Environment):
               self.proof = Short_proof(theorem=self)
               proof = True
         else:
-          self.theorem = theorem
           if isinstance(theorem, Definition):
             self.name = babel.WELLDEFINITION_OF +" %s" % theorem.ref
           else:
@@ -78,8 +78,9 @@ class _basetheorem(context.Environment):
 
     @property
     def begin(self):
-        aux = r"\refstepcounter{%s}" %  self.counter
-        aux += r"\newline\%s{" % self.environment
+        aux = "\\vspace{5mm}\n\n"
+        aux += r"\refstepcounter{%s}" %  self.counter
+        aux += r"\%s{" % self.environment
         for counter in self.label_counters:
             aux += r"\arabic{%s}." % counter
         if aux[-1] is ".":
@@ -124,6 +125,7 @@ class _basetheorem(context.Environment):
                     aux += r"\protect \textit{"+babel.TO_PROOF+": }" + self.proof + "\n\n"
             
         aux += "}\n\n"
+        aux += "\\vspace{5mm}"
         return aux
 
 class _theorem_fabric(context._fabric):
@@ -132,7 +134,7 @@ class _theorem_fabric(context._fabric):
         _dict["name"] = name
 
         _dict["ref"] = property(lambda self: r"\ref{%i}" % id(self))
-        _dict["link"] = property(lambda self: r"\footnote{\ref{%i} \hspace*{1cm}}" % id(self))
+        _dict["link"] = property(lambda self: r"\textsuperscript{\dag}\marginpar{\ref{%i}}" % id(self))
         return super().__new__(cls, name, bases, _dict)
 
 

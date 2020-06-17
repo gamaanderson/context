@@ -21,7 +21,7 @@ class lazy_reference(ContextObject):
         else:
             self.module_name = ref_string.split(".")[0]+appendix
             self.path = ref_string.split(".")[1:]
-        self.first_call = str(self)
+        #self.first_call = str(self)
 
     def __str__(self):
         if self.module_name in sys.modules.keys():
@@ -67,3 +67,7 @@ def link(ref_string):
     aux = lazy_link(ref_string)
     list_refs.append(aux)
     return aux
+
+def call_all_refs():
+    for element in list_refs:
+      str(element)

@@ -33,23 +33,23 @@ class Forms_bundle(MathObject):
 
 class Tangent_Space(MathObject):
   def __init__(self, manifold, base_point=None, **kwargs):
-    if base_point ist None:
+    if base_point is None:
       ans = "T "+manifold
     else:
       ans = "T_{"+base_point+"} "+manifold
     super().__init__(ans)
     self.manifold = Math(manifold)
-    self.base_point = Math(degree)
+    self.base_point = Math(base_point)
 
 class Cotangent_Space(MathObject):
   def __init__(self, manifold, base_point=None, **kwargs):
-    if base_point ist None:
+    if base_point is None:
       ans = "T^* "+manifold
     else:
       ans = "T^*_{"+base_point+"} "+manifold
     super().__init__(ans)
     self.manifold = Math(manifold)
-    self.base_point = Math(degree)
+    self.base_point = Math(base_point)
 
 class Sections(MathObject):
   ans = Multi_string(("\\Gamma",))
