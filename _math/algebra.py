@@ -16,6 +16,6 @@ def _times(arg0, arg1):
 
 times = Math(_times)
 
-Group_Category =  category_theory.Category(CategoryFont("Grp"), object_font=LinearFont)
+Group_Category =  category_theory.Category(CategoryFont("Grp"), object_font=LinearFont, morphism_font=LinearFont)
 Ring_Category =  category_theory.Category(CategoryFont("Ring"), object_font=LinearFont)
 Field_Category =  category_theory.Category(CategoryFont("Field"), object_font=LinearFont)

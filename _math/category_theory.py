@@ -4,9 +4,9 @@ class CategoryFont(MathFont):
     latex_command = [""]
 
 isomorph = Math(r"\cong")
-hom_funktor = CallableMathObject(r"\hom", lambda *args: Math("\hom")+tuple(args))
+hom_funktor = CallableMathObject(r"\mathtext{Hom}", lambda *args: Math("\hom")+tuple(args))#deprecated
 
-hom = hom_funktor
+hom = hom_funktor #deprecated
 
 class Morphism(MathObject):
     category = ""
@@ -58,6 +58,9 @@ class Category(MathObject):
         mor = Morphism(self.morphism_font(name), domane, codomane)
         mor.category = self
         return mor
+    
+    def Hom_functor(self,domane, codomane):
+        return Math(self.morphism_font("Hom")+Math(domane,codomane))
 
 identity = Math(r"\mathrm{id}")
 Set_Category = Category("Set", category_font=True)

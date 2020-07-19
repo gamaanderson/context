@@ -1,6 +1,6 @@
 # This Python file uses the following encoding: utf-8
 import context
-from _document import Document, title, author, section, Subsection, Section
+from _document import Document, title, author, section, Subsection, Section, Paragraph
 
 documentClass = context.DocumentClass("article")
 context.ans += documentClass

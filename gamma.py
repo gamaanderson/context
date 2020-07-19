@@ -62,7 +62,7 @@ context.ans += r"\let\propsubset\subset"
 context.ans += r"\renewcommand{\subset}{\subseteq}"
 context.ans += r"\let\propsupset\supset"
 context.ans += r"\renewcommand{\supset}{\supseteq}"
-context.ans += r"\DeclareMathOperator{\xto}{ }"
+context.ans += r"\DeclareMathOperator{\xto}{\xrightarrow}"
 
 
 
