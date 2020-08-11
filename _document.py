@@ -30,7 +30,7 @@ class Section(context.Environment):
             self.begin = name + "{%s}\label{%i}" % (title,id(self))
         else:
             self.begin = name + "[%s]{%s}\label{%i}" % (short_title,title,id(self))
-        self.end = "\\vspace{1 in}"
+        self.end= ""
 
 class Subsection(context.Environment):
     
@@ -42,7 +42,7 @@ class Subsection(context.Environment):
         else:
           name = "\\subsection*"
         self.begin = name + "{%s}\label{%i}" % (title, id(self))
-        self.end = ""
+        self.end = "\\vspace{1 in}"
 
 class Paragraph(context.Environment):
     

@@ -28,9 +28,9 @@ class lazy_reference(ContextObject):
             mod = sys.modules[self.module_name]
             return functools.reduce(getattr, self.path+["ref"], mod)
         elif self.path:
-            return r"\ref{"+str(self.path[-1]).replace("_","\\_")+r"}"
+            return r"\ref{"+str(self.path[-1])+r"}"
         else:
-            return r"\ref{"+str(self.module_name).replace("_","\\_")+r"}"
+            return r"\ref{"+str(self.module_name)+r"}"
 
 
 class lazy_link(ContextObject):

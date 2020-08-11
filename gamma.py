@@ -4,6 +4,7 @@ from theorem import *
 from lazy_referenz import ref, link
 from bibtex import Citation
 
+context.usepackage("mathtools")
 context.usepackage("inputenc","utf8")
 context.usepackage("fontspec")
 
@@ -62,8 +63,8 @@ context.ans += r"\let\propsubset\subset"
 context.ans += r"\renewcommand{\subset}{\subseteq}"
 context.ans += r"\let\propsupset\supset"
 context.ans += r"\renewcommand{\supset}{\supseteq}"
-context.ans += r"\DeclareMathOperator{\xto}{\xrightarrow}"
-
+context.ans += r"\newcommand{\xto}[1]{\xrightarrow{#1}}"
+context.ans += r"\renewcommand{\xmapsto}[1]{\mapsto^{#1}}"
 
 
 

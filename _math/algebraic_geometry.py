@@ -58,6 +58,6 @@ class Sheaf_cohomology(category_theory.Morphism):
     super().__init__(ans)
     self.order = order
 
-symetric_algebra_sheaf = Morphism(SheafFont("Sym"))
+symmetric_algebra_sheaf = Morphism(SheafFont("Sym"))
 
 endormophism_sheaf = lambda sheaf: Math(SheafFont("End")+Math(sheaf,None))

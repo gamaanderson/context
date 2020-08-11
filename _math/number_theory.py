@@ -17,3 +17,4 @@ Naturals_without_0.description = "Naturals without 0"
 
 Naturals = Naturals_without_0
 
+Unitary_complexes = Math(BboldFont("S")+ "^1")
