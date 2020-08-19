@@ -36,11 +36,12 @@ context.ans += r"\renewcommand{\thesubtheorem}{\thetheorem.\arabic{subtheorem}}"
 
 
 
+
 class _basetheorem(context.Environment):
     theorem_end = None
     counter = "theorem"
     label_counters = ("section", "theorem")
-    environment = "textbf"
+    environment = "textsc"
     formation = ""
     style = ()
 
@@ -78,7 +79,7 @@ class _basetheorem(context.Environment):
 
     @property
     def begin(self):
-        aux = "\\vspace{5mm}\n\n"
+        aux = "\n\n"
         aux += r"\refstepcounter{%s}" %  self.counter
         aux += r"\%s{" % self.environment
         for counter in self.label_counters:
@@ -125,7 +126,7 @@ class _basetheorem(context.Environment):
                     aux += r"\protect \textit{"+babel.TO_PROOF+": }" + self.proof + "\n\n"
             
         aux += "}\n\n"
-        aux += "\\vspace{5mm}"
+        aux += " \\begin{center} * \\end{center}\n\n"
         return aux
 
 class _theorem_fabric(context._fabric):
@@ -134,7 +135,7 @@ class _theorem_fabric(context._fabric):
         _dict["name"] = name
 
         _dict["ref"] = property(lambda self: r"\ref{%i}" % id(self))
-        _dict["link"] = property(lambda self: r"\textsuperscript{\dag}\marginpar{\ref{%i}}" % id(self))
+        _dict["link"] = property(lambda self: r"\textsuperscript{\dag}\marginpar{s. \ref{%i}}" % id(self))
         return super().__new__(cls, name, bases, _dict)
 
 

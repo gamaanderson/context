@@ -193,8 +193,8 @@ class Environment(ContextObject):
 class itemize(Environment):
     def __init__(self, type_="itemize", silence=False):
         super().__init__(silence)
-        self.begin = "\\begin{"+type_+"}"
-        self.end = "\\end{"+type_+"}"
+        self.begin = "\\vspace{-\\parskip}\\begin{"+type_+"}"
+        self.end = "\\end{"+type_+"}\\vspace{-\\parskip}"
 
     def __call__(self, text=""):
         self.ans += "\item " + text

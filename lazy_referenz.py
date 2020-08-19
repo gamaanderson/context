@@ -13,6 +13,7 @@ class lazy_reference(ContextObject):
     def __init__(self, ref_string):
         super().__init__()
         self.ref_string = ref_string
+        self.frame = inspect.currentframe().f_back.f_back
         if ref_string.startswith("."):
             frame= inspect.currentframe().f_back.f_back
             frameInfo = inspect.getframeinfo(frame)
@@ -37,6 +38,7 @@ class lazy_link(ContextObject):
     def __init__(self, ref_string):
         super().__init__()
         self.ref_string = ref_string
+        self.frame = inspect.currentframe().f_back.f_back
         if ref_string.startswith("."):
             frame= inspect.currentframe().f_back.f_back
             frameInfo = inspect.getframeinfo(frame)
