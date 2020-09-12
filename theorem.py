@@ -40,7 +40,7 @@ context.ans += r"\renewcommand{\thesubtheorem}{\thetheorem.\arabic{subtheorem}}"
 class _basetheorem(context.Environment):
     theorem_end = None
     counter = "theorem"
-    label_counters = ("section", "theorem")
+    #label_counters = ("section", "theorem")
     environment = "textsc"
     formation = ""
     style = ()
@@ -68,7 +68,7 @@ class _basetheorem(context.Environment):
         if name is not None:
             self.name = name
         if subname is not None:
-            self.name += ": "+subname
+            self.name += " -- "+subname
         self.proof_link = proof or (proof_type is not "long")
 
     def __enter__(self):
@@ -81,11 +81,13 @@ class _basetheorem(context.Environment):
     def begin(self):
         aux = "\n\n"
         aux += r"\refstepcounter{%s}" %  self.counter
+        
+        aux += r"\textcolor{red}{\liningnums{\MakeUppercase{\the%s})}}" % self.counter
         aux += r"\%s{" % self.environment
-        for counter in self.label_counters:
-            aux += r"\arabic{%s}." % counter
-        if aux[-1] is ".":
-                aux=aux[:-1]
+        #for counter in self.label_counters:
+        #    aux += r"\arabic{%s}." % counter
+        #if aux[-1] is ".":
+        #        aux=aux[:-1]
         if self.dependences:
           if len(self.dependences) == 1:
             ###TODO implement babel
@@ -100,7 +102,7 @@ class _basetheorem(context.Environment):
             aux += aux1
         #if self.proof_link:
         #    aux += r"\protect" + self.proof.link
-        aux += r") %s} \label{%i}""\n" % (self.name, id(self))
+        aux += r" %s:} \label{%i}""\n" % (self.name, id(self))
         aux += r"{"
         aux += self.formation
         for style in self.style:
@@ -126,7 +128,7 @@ class _basetheorem(context.Environment):
                     aux += r"\protect \textit{"+babel.TO_PROOF+": }" + self.proof + "\n\n"
             
         aux += "}\n\n"
-        aux += " \\begin{center} * \\end{center}\n\n"
+        aux += " \\vspace{0.5in}\n\n"
         return aux
 
 class _theorem_fabric(context._fabric):
@@ -135,7 +137,7 @@ class _theorem_fabric(context._fabric):
         _dict["name"] = name
 
         _dict["ref"] = property(lambda self: r"\ref{%i}" % id(self))
-        _dict["link"] = property(lambda self: r"\textsuperscript{\dag}\marginpar{s. \ref{%i}}" % id(self))
+        _dict["link"] = property(lambda self: r"\textsuperscript{\dag}\marginpar{\textit{\textcolor{gray}{s. \ref{%i}}}}" % id(self))
         return super().__new__(cls, name, bases, _dict)
 
 
@@ -154,18 +156,18 @@ Proposition = newtheorem(babel.PROPOSITION)
 Corollary = newtheorem(babel.COROLLARY)
 
 Notation = newtheorem(babel.NOTATION,)
-Definition = newtheorem(babel.DEFINITION,theorem_end=r"$\Diamond$")
-Example = newtheorem(babel.EXAMPLE,theorem_end=r"$\Diamond$")
+Definition = newtheorem(babel.DEFINITION,theorem_end=r" ")
+Example = newtheorem(babel.EXAMPLE,theorem_end=r" ")
 Subtheorem = newtheorem("")
 Subtheorem.label_counters = ("section", "theorem", "subtheorem")
 Subtheorem.counter = "subtheorem"
 Subtheorem.environment = "subparagraph"
 Subtheorem.formation = r"\setlength{\leftskip}{0.6cm}"
 
-Proof = newtheorem(babel.PROOF,theorem_end=r"$\qedsymbol$")
+Proof = newtheorem(babel.PROOF,theorem_end=r" ")
 
 class Short_proof(context.Environment):
-    theorem_end = r"$\qedsymbol$"
+    theorem_end = r" "
 
     def __init__(self, *args, theorem=None, **kwargs):
         super().__init__(*args, **kwargs)

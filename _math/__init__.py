@@ -64,7 +64,7 @@ class MathFont(ContextObject):
         self.text = text
 
     def __str__(self):
-        return ""+self.latex_command[0]+"{"+self.text+"}"
+        return "{"+self.latex_command[0]+"{"+self.text+"}}"
 
 class MathObject(ContextObject):
     ans = Multi_string()

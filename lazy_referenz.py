@@ -65,9 +65,12 @@ def ref(ref_string):
     list_refs.append(aux)
     return aux
 
-def link(ref_string):
+def link(ref_string, kern=False):
     aux = lazy_link(ref_string)
-    list_refs.append(aux)
+    if kern:
+        list_refs.append(aux+"\\kern-0.2em")
+    else:
+        list_refs.append(aux)
     return aux
 
 def call_all_refs():
