@@ -118,14 +118,14 @@ class _basetheorem(context.Environment):
         if self.proof_link:             
             if isinstance(self.proof, Proof):
                 if isinstance(self, Definition):
-                    aux += r"\protect \textit{"+babel.TO_WELLDEFINITION+": }" + self.proof.ref + "\n\n"
+                    aux += r"\protect \textcolor{red}{\textit{"+babel.TO_WELLDEFINITION+": }}" + self.proof.ref + "\n\n"
                 else:
-                    aux += r"\protect \textit{"+babel.TO_PROOF+": }" + self.proof.ref + "\n\n"
+                    aux += r"\protect \textcolor{red}{\textit{"+babel.TO_PROOF+": }}" + self.proof.ref + "\n\n"
             else:
                 if isinstance(self, Definition):
-                    aux += r"\protect \textit{"+babel.TO_WELLDEFINITION+": }" + self.proof + "\n\n"
+                    aux += r"\protect \textcolor{red}{\textit{"+babel.TO_WELLDEFINITION+": }}" + self.proof + "\n\n"
                 else:
-                    aux += r"\protect \textit{"+babel.TO_PROOF+": }" + self.proof + "\n\n"
+                    aux += r"\protect \textcolor{red}{\textit{"+babel.TO_PROOF+": }}" + self.proof + "\n\n"
             
         aux += "}\n\n"
         aux += " \\vspace{0.5in}\n\n"

@@ -80,7 +80,7 @@ class _Short_proof_idea(Short_proof):
     def __init__(self, *args, theorem=None, **kwargs):
       super().__init__(*args, **kwargs)
       self.theorem = theorem
-      self.ans += r"\protect \textit{Beweisidee:}"
+      self.ans += r"\protect \textcolor{red}{\textit{Beweisidee:}}"
 
 def Proof_idea(*args, proof_type="long", **kwargs):
     if proof_type is "long":
