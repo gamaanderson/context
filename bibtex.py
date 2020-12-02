@@ -15,5 +15,5 @@ class Citation(context.ContextObject):
 
     @property
     def link(self):
-      return r"\textsuperscript{\dag}\marginpar{\textit{\textcolor{gray}{"+self.ref+"}}}"
+      return r"\marginpar{"+self.ref+"}"
       return r"\footnote{"+self.ref+r"\hspace*{1cm} }"

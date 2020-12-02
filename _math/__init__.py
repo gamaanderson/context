@@ -30,7 +30,7 @@ class Equation(Environment):
     @property
     def link(self):
         self.was_referenced = True
-        return r"\footnote{\ref{%i} \hspace*{1cm}}" % id(self)
+        return r"\marginpar{s. \ref{%i}}" % id(self)
     @property
     def name(self):
         if self.was_referenced:

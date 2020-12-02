@@ -84,9 +84,9 @@ class _Short_proof_idea(Short_proof):
 
 def Proof_idea(*args, proof_type="long", **kwargs):
     if proof_type is "long":
-      return _Proof_idea(*args,*kwargs)
+      return _Proof_idea(*args,**kwargs)
     else:
-      return _Short_proof_idea(*args,*kwargs)
+      return _Short_proof_idea(*args,**kwargs)
 
 act = r"\mathbin{\circlearrowleft}"
 

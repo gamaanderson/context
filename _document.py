@@ -32,6 +32,11 @@ class Section(context.Environment):
             self.begin = name + "[%s]{%s}\label{%i}" % (short_title,title,id(self))
         self.end= ""
 
+    def __add__(self, element):
+        self.ans += element
+        return self
+
+
 class Subsection(context.Environment):
     
     def __init__(self, title, numbered=True, silence=False):
@@ -44,6 +49,10 @@ class Subsection(context.Environment):
         self.begin = name + "{%s}\label{%i}" % (title, id(self))
         self.end = "\\vspace{1 in}"
 
+    def __add__(self, element):
+        self.ans += element
+        return self
+
 class Paragraph(context.Environment):
     
     def __init__(self, title, silence=False):
@@ -52,3 +61,7 @@ class Paragraph(context.Environment):
         name = "\\paragraph"
         self.begin = name + "{%s}\label{%i}" % (title, id(self))
         self.end = ""
+
+    def __add__(self, element):
+        self.ans += element
+        return self

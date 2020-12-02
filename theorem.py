@@ -4,8 +4,8 @@ import context
 from latex import amssymb, amsthm, thmtools, amsmath
 import babel_context as babel
 
-context.usepackage("footmisc","para", "perpage")
-context.ans += "\\let\\oldfootnote\\footnote\n\\def\\footnote{\\ifhmode\\unskip\\fi\\oldfootnote}"
+#context.usepackage("footmisc","para", "perpage")
+#context.ans += "\\let\\oldfootnote\\footnote\n\\def\\footnote{\\ifhmode\\unskip\\fi\\oldfootnote}"
 
 class _dynamic_string():
     def __init__(self, string):
@@ -44,6 +44,7 @@ class _basetheorem(context.Environment):
     environment = "textsc"
     formation = ""
     style = ()
+    end_space = " \\vspace{0.5in}"
 
     def __init__(self, name=None, subname=None, ans=None, theorem=None, proof=False, proof_type = "long", **kwargs):
         super().__init__(**kwargs)
@@ -60,15 +61,15 @@ class _basetheorem(context.Environment):
           else:
               self.proof = Short_proof(theorem=self)
               proof = True
+          if name is not None:
+            self.name = name
         else:
           if isinstance(theorem, Definition):
             self.name = babel.WELLDEFINITION_OF +" %s" % theorem.ref
           else:
             self.name = babel.PROOF_OF+" %s" % theorem.ref
-        if name is not None:
-            self.name = name
         if subname is not None:
-            self.name += " -- "+subname
+          self.name += " -- "+subname
         self.proof_link = proof or (proof_type is not "long")
 
     def __enter__(self):
@@ -102,7 +103,10 @@ class _basetheorem(context.Environment):
             aux += aux1
         #if self.proof_link:
         #    aux += r"\protect" + self.proof.link
-        aux += r" %s:} \label{%i}""\n" % (self.name, id(self))
+        if self.name is None:
+            aux += r" } \label{%i}""\n" % (self.name, id(self))
+        else:
+            aux += r" %s:} \label{%i}""\n" % (self.name, id(self))
         aux += r"{"
         aux += self.formation
         for style in self.style:
@@ -128,7 +132,7 @@ class _basetheorem(context.Environment):
                     aux += r"\protect \textcolor{red}{\textit{"+babel.TO_PROOF+": }}" + self.proof + "\n\n"
             
         aux += "}\n\n"
-        aux += " \\vspace{0.5in}\n\n"
+        aux += self.end_space +"\n\n"
         return aux
 
 class _theorem_fabric(context._fabric):
@@ -137,7 +141,7 @@ class _theorem_fabric(context._fabric):
         _dict["name"] = name
 
         _dict["ref"] = property(lambda self: r"\ref{%i}" % id(self))
-        _dict["link"] = property(lambda self: r"\textsuperscript{\dag}\marginpar{\textit{\textcolor{gray}{s. \ref{%i}}}}" % id(self))
+        _dict["link"] = property(lambda self: r"\marginpar{s. \ref{%i}}" % id(self))
         return super().__new__(cls, name, bases, _dict)
 
 
@@ -161,8 +165,9 @@ Example = newtheorem(babel.EXAMPLE,theorem_end=r" ")
 Subtheorem = newtheorem("")
 Subtheorem.label_counters = ("section", "theorem", "subtheorem")
 Subtheorem.counter = "subtheorem"
-Subtheorem.environment = "subparagraph"
+Subtheorem.environment = "text"
 Subtheorem.formation = r"\setlength{\leftskip}{0.6cm}"
+Subtheorem.end_space = ""
 
 Proof = newtheorem(babel.PROOF,theorem_end=r" ")
 
