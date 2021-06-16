@@ -2,7 +2,7 @@ from . import Math, category_theory
 
 from .number_theory import Complexes
 from .linear_algebra import LinearFont
-from .category_theory import CategoryFont
+from .category_theory import CategoryFont, Morphism
 
 
 Complex_Torus = Math(Complexes + "^*")
@@ -15,6 +15,8 @@ def _times(arg0, arg1):
         return arg0+"\\times "+arg1
 
 times = Math(_times)
+
+symetric_algebra = Morphism(LinearFont("Sym"))
 
 Group_Category =  category_theory.Category(CategoryFont("Grp"), object_font=LinearFont, morphism_font=LinearFont)
 Ring_Category =  category_theory.Category(CategoryFont("Ring"), object_font=LinearFont)

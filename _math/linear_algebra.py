@@ -14,8 +14,11 @@ def _direct_sum(arg0, arg1):
 
 direct_sum = Math(_direct_sum)
 
-def _tensor(arg0, arg1):
+def _tensor(arg0, arg1,base=None):
+    if base is None:
         return arg0+"\\otimes "+arg1
+    else:
+        return arg0+"\\otimes_{"+base+"} "+arg1
 
 tensor = CallableMathObject("\\otimes", _tensor)
 
@@ -65,7 +68,7 @@ orthogonal_linear_group = Math(_unitary_linear_group)
 def _matrixes(ring=Complexes, size="n"):
         return LinearFont("M")+"_"+size+"("+ring+")"
 Matrixes = Math(_matrixes)
-
-symetric_algebra = Morphism(LinearFont("Sym"))
+ 
+symetric_algebra = Morphism(LinearFont("Sym")) #deprecated
 
 one_morphism =  Morphism("1")

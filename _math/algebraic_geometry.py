@@ -61,3 +61,5 @@ class Sheaf_cohomology(category_theory.Morphism):
 symmetric_algebra_sheaf = Morphism(SheafFont("Sym"))
 
 endormophism_sheaf = lambda sheaf: Math(SheafFont("End")+Math(sheaf,None))
+
+homomorphism_sheaf = lambda sheaf1, sheaf2: Math(SheafFont("End")+Math(sheaf1,sheaf2))

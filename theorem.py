@@ -39,6 +39,8 @@ context.ans += r"\renewcommand{\thesubtheorem}{\thetheorem.\arabic{subtheorem}}"
 
 class _basetheorem(context.Environment):
     theorem_end = None
+    short_proof_name = ""
+    long_proof_name = ""
     counter = "theorem"
     #label_counters = ("section", "theorem")
     environment = "textsc"
@@ -64,10 +66,7 @@ class _basetheorem(context.Environment):
           if name is not None:
             self.name = name
         else:
-          if isinstance(theorem, Definition):
-            self.name = babel.WELLDEFINITION_OF +" %s" % theorem.ref
-          else:
-            self.name = babel.PROOF_OF+" %s" % theorem.ref
+          self.name = theorem.long_proof_name + " %s" % theorem.ref
         if subname is not None:
           self.name += " -- "+subname
         self.proof_link = proof or (proof_type is not "long")
@@ -118,18 +117,12 @@ class _basetheorem(context.Environment):
         if self.theorem_end is None:
             aux = "\n"
         else:
-            aux = " \hfill %s\n\n" % self.theorem_end
+            aux = " %s\n" % self.theorem_end
         if self.proof_link:             
             if isinstance(self.proof, Proof):
-                if isinstance(self, Definition):
-                    aux += r"\protect \textcolor{red}{\textit{"+babel.TO_WELLDEFINITION+": }}" + self.proof.ref + "\n\n"
-                else:
-                    aux += r"\protect \textcolor{red}{\textit{"+babel.TO_PROOF+": }}" + self.proof.ref + "\n\n"
+                aux += r"\protect \textcolor{red}{\textit{"+self.short_proof_name+": }}" + self.proof.ref + "\n\n"
             else:
-                if isinstance(self, Definition):
-                    aux += r"\protect \textcolor{red}{\textit{"+babel.TO_WELLDEFINITION+": }}" + self.proof + "\n\n"
-                else:
-                    aux += r"\protect \textcolor{red}{\textit{"+babel.TO_PROOF+": }}" + self.proof + "\n\n"
+                aux += r"\protect \textcolor{red}{\textit{"+self.short_proof_name+": }}" + self.proof + "\n\n"
             
         aux += "}\n\n"
         aux += self.end_space +"\n\n"
@@ -141,15 +134,15 @@ class _theorem_fabric(context._fabric):
         _dict["name"] = name
 
         _dict["ref"] = property(lambda self: r"\ref{%i}" % id(self))
-        _dict["link"] = property(lambda self: r"\marginpar{s. \ref{%i}}" % id(self))
+        _dict["link"] = property(lambda self: r"\marginpar{see \ref{%i}}" % id(self))
         return super().__new__(cls, name, bases, _dict)
 
 
 #class factory
-def newtheorem(name, style=(), theorem_end=None, **kwargs):
+def newtheorem(name, style=(), theorem_end=None, short_proof_name=babel.TO_PROOF, long_proof_name=babel.PROOF_OF, **kwargs):
     arg = r""
     # metaclass magics
-    return _theorem_fabric(name,(_basetheorem,), {"style":style,"theorem_end":theorem_end})
+    return _theorem_fabric(name,(_basetheorem,), {"style":style,"theorem_end":theorem_end,"short_proof_name":short_proof_name, "long_proof_name":long_proof_name})
 
 Theorem = newtheorem(babel.THEOREM)
 Conjecture = newtheorem(babel.CONJECTURE)
@@ -159,9 +152,11 @@ Affirmation = newtheorem(babel.AFFIRMATION)
 Proposition = newtheorem(babel.PROPOSITION)
 Corollary = newtheorem(babel.COROLLARY)
 
+Question = newtheorem(babel.QUESTION,short_proof_name=babel.ANSWER,long_proof_name=babel.ANSWER_TO)
+
 Notation = newtheorem(babel.NOTATION,)
-Definition = newtheorem(babel.DEFINITION,theorem_end=r" ")
-Example = newtheorem(babel.EXAMPLE,theorem_end=r" ")
+Definition = newtheorem(babel.DEFINITION,theorem_end=r" ",short_proof_name=babel.TO_WELLDEFINITION,long_proof_name=babel.WELLDEFINITION_OF)
+Example = newtheorem(babel.EXAMPLE,theorem_end=r"\vspace{0in}  \textcolor{red}{\scriptsize \textit{\hspace*{\fill} \mbox{ Quod~erat~faciendum}}} \pagebreak[2] ")
 Subtheorem = newtheorem("")
 Subtheorem.label_counters = ("section", "theorem", "subtheorem")
 Subtheorem.counter = "subtheorem"
@@ -169,7 +164,7 @@ Subtheorem.environment = "text"
 Subtheorem.formation = r"\setlength{\leftskip}{0.6cm}"
 Subtheorem.end_space = ""
 
-Proof = newtheorem(babel.PROOF,theorem_end=r" ")
+Proof = newtheorem(babel.PROOF,theorem_end=r" \vspace{0in}  \textcolor{red}{\scriptsize \textit{\hspace*{\fill} \mbox{ Quod~erat~demonstrandum}}} \pagebreak[2]")
 
 class Short_proof(context.Environment):
     theorem_end = r" "

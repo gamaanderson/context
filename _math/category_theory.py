@@ -4,9 +4,10 @@ class CategoryFont(MathFont):
     latex_command = [""]
 
 isomorph = Math(r"\cong")
-hom_funktor = CallableMathObject(r"\mathrm{Hom}", lambda *args: Math("\hom")+tuple(args))#deprecated
+hom_functor = CallableMathObject(r"\mathrm{Hom}", lambda *args: Math("\hom")+tuple(args))#deprecated
 
-hom = hom_funktor #deprecated
+hom_funktor = hom_functor #deprecated
+hom = hom_functor #deprecated
 
 class Morphism(MathObject):
     category = ""

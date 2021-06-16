@@ -53,8 +53,11 @@ class Cotangent_Space(MathObject):
 
 class Sections(MathObject):
   ans = Multi_string(("\\Gamma",))
-  def __init__(self, bundle,  **kwargs):
-    ans = "\\Gamma ("+Math(bundle)+")"
+  def __init__(self, bundle, base=None, **kwargs):
+    if base is None:
+      ans = "\\Gamma ("+Math(bundle)+")"
+    else:
+      ans = "\\Gamma ("+Math(base)+","+Math(bundle)+")"
     super().__init__(ans)
     self.bundle = Math(bundle)
 
