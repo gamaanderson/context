@@ -72,15 +72,15 @@ class _Proof_idea(Proof):
     def __init__(self, *args, **kwargs):
       super().__init__(*args, **kwargs)
       if self.theorem is not None:
-        self.name = "Beweisidee von %s" % self.theorem.ref
+        self.name = "Idea of the proof for %s" % self.theorem.ref
       else:
-        self.name = "Beweisidee"
+        self.name = "Idea of the proof"
 
 class _Short_proof_idea(Short_proof):
     def __init__(self, *args, theorem=None, **kwargs):
       super().__init__(*args, **kwargs)
       self.theorem = theorem
-      self.ans += r"\protect \textcolor{red}{\textit{Beweisidee:}}"
+      self.ans += r"\protect \textcolor{red}{\textit{Idea of the proof:}}"
 
 def Proof_idea(*args, proof_type="long", **kwargs):
     if proof_type is "long":

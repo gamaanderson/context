@@ -76,3 +76,32 @@ def link(ref_string, kern=False):
 def call_all_refs():
     for element in list_refs:
       str(element)
+
+
+"""
+import inspect
+import ctypes
+class released:
+  def __init__(self):
+      pass
+  def __enter__(self):
+      frame = inspect.stack()[1][0]
+      print(frame.f_locals)
+  def __exit__(self, type, value, tb):
+      frame = inspect.stack()[1][0]
+      print(frame.f_locals)
+      frame.f_locals.pop("b")
+      ctypes.pythonapi.PyFrame_LocalsToFast(
+        ctypes.py_object(frame),
+        ctypes.c_int(1))
+
+def f():
+  a=1
+  print("outside")
+  with released():
+    print("inside")
+    a=0
+    b=3
+  print("out")
+  print(locals())
+"""

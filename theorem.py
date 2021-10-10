@@ -31,7 +31,7 @@ context.ans += r"\newcounter{theorem}[section]"
 context.ans += r"\renewcommand{\thetheorem}{\thesection.\arabic{theorem}}"
 
 context.ans += r"\newcounter{subtheorem}[theorem]"
-context.ans += r"\renewcommand{\thesubtheorem}{\thetheorem.\arabic{subtheorem}}"
+context.ans += r"\renewcommand{\thesubtheorem}{\thetheorem\alph{subtheorem}}"
 
 
 
@@ -156,7 +156,8 @@ Question = newtheorem(babel.QUESTION,short_proof_name=babel.ANSWER,long_proof_na
 
 Notation = newtheorem(babel.NOTATION,)
 Definition = newtheorem(babel.DEFINITION,theorem_end=r" ",short_proof_name=babel.TO_WELLDEFINITION,long_proof_name=babel.WELLDEFINITION_OF)
-Example = newtheorem(babel.EXAMPLE,theorem_end=r"\vspace{0in}  \textcolor{red}{\scriptsize \textit{\hspace*{\fill} \mbox{ Quod~erat~faciendum}}} \pagebreak[2] ")
+Example = newtheorem(babel.EXAMPLE,theorem_end=r"\vspace{0in}  \textcolor{red}{\scriptsize \textit{\hspace*{\fill} \mbox{}}} \pagebreak[2] ")
+#Example = newtheorem(babel.EXAMPLE,theorem_end=r"\vspace{0in}  \textcolor{red}{\scriptsize \textit{\hspace*{\fill} \mbox{ Quod~erat~faciendum}}} \pagebreak[2] ")
 Subtheorem = newtheorem("")
 Subtheorem.label_counters = ("section", "theorem", "subtheorem")
 Subtheorem.counter = "subtheorem"
@@ -164,7 +165,8 @@ Subtheorem.environment = "text"
 Subtheorem.formation = r"\setlength{\leftskip}{0.6cm}"
 Subtheorem.end_space = ""
 
-Proof = newtheorem(babel.PROOF,theorem_end=r" \vspace{0in}  \textcolor{red}{\scriptsize \textit{\hspace*{\fill} \mbox{ Quod~erat~demonstrandum}}} \pagebreak[2]")
+Proof = newtheorem(babel.PROOF,theorem_end=r" \vspace{0in}  \textcolor{red}{\scriptsize \textit{\hspace*{\fill} \mbox{}}} \pagebreak[2]")
+#Proof = newtheorem(babel.PROOF,theorem_end=r" \vspace{0in}  \textcolor{red}{\scriptsize \textit{\hspace*{\fill} \mbox{ Quod~erat~demonstrandum}}} \pagebreak[2]")
 
 class Short_proof(context.Environment):
     theorem_end = r" "
