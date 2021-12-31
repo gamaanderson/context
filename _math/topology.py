@@ -1,2 +1,4 @@
+from . import Math
+
 def closer(text):
-    return r"\overline{"+text+"}"
+    return Math(r"\overline{"+text+"}")
