@@ -87,3 +87,6 @@ class DeRahm_cohomology(category_theory.Morphism):
     ans = LinearFont("H")+"_{dR}"+"^{"+order+"}"
     super().__init__(ans)
     self.order = order
+
+def Grassmanian(r, V):
+    return Math(C_Font("Gr")+Math(r,V))
