@@ -36,7 +36,7 @@ def _spec(text):
         return SchemeFont("spec") + Math(text,None)
 spec = Math(_spec)
 
-def Grassmanian(r, V):
+def Grassmannian(r, V):
     return Math(SchemeFont("Gr")+Math(r,V))
 
 

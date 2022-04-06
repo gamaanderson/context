@@ -48,7 +48,7 @@ from _math import Equation
 from _math.number_theory import Complexes, Reals, Integers, Rationals
 from _math.number_theory import Naturals_with_0 as Naturals
 from _math.algebra import polyring
-from _math.algebraic_geometry import Affin, Projectiv, regularFunctions, picard, spec, Grassmanian
+from _math.algebraic_geometry import Affin, Projectiv, regularFunctions, picard, spec, Grassmannian
 from _math.set_theory import Set
 from _math.category_theory import isomorph
 from _math.topology import closer

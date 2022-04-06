@@ -88,5 +88,5 @@ class DeRahm_cohomology(category_theory.Morphism):
     super().__init__(ans)
     self.order = order
 
-def Grassmanian(r, V):
+def Grassmannian(r, V):
     return Math(C_Font("Gr")+Math(r,V))
