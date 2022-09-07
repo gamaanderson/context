@@ -11,15 +11,17 @@ hom = hom_functor #deprecated
 
 class Morphism(MathObject):
     category = ""
+    arrow = " \\to "
     
     def __init__(self,name=None,domane=None,codomane=None):
         super().__init__(name)
         self.domane = domane
         self.codomane = codomane
+        
     
     @property
     def long_name(self):
-        return Math(self+":"+self.domane+"\\to "+self.codomane)
+        return Math(self+":"+self.domane+self.arrow+self.codomane)
 
     @property
     def element_of(self):
